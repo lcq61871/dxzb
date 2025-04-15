@@ -41,9 +41,9 @@ def update_run_time():
 
 def check_ip(ip, port):
     try:
-        url = f"http://{ip}:{port}/stat"
+        url = f"http://{ip}:{port}/status"
         response = requests.get(url, timeout=1)  # 设置超时为1秒
-        if response.status_code == 200 and 'Multi stream daemon' in response.text:
+        if response.status_code == 200 and 'udpxy status' in response.text:
             print(f"扫描到有效ip: {ip}:{port}")
             return f"{ip}:{port}"
     except requests.RequestException:
@@ -85,7 +85,7 @@ def read_config(config_path):
                     if len(parts) == 2:
                         option = int(parts[1].strip())  # 去除扫描类型部分前后的空格，并转换为整数
                     else:
-                        option = 1  # 默认为0
+                        option = 0  # 默认为0
                     if ':' in ip_port:
                         ip, port = ip_port.split(':')
                         configs.append((ip, port, option))
@@ -145,7 +145,7 @@ if should_run():
         status_thread = threading.Thread(target=update_status, args=(checked_count,))
         status_thread.start()
 
-        max_workers = 200 if option == 0 else 100  # 扫描IP线程数量
+        max_workers = 10 if option == 0 else 100  # 扫描IP线程数量
         with ThreadPoolExecutor(max_workers=max_workers) as executor:
             future_to_ip = {executor.submit(check_ip, ip, port): ip for ip in ips_to_check}
             for future in as_completed(future_to_ip):
