@@ -187,7 +187,7 @@ speed_test_queue = Queue()
 speed_results = []
 
 
-# 读取iptv_list.txt文件中的所有频道，并将它们添加到队列中
+# 读取iptv4.txt文件中的所有频道，并将它们添加到队列中
 def load_channels_to_speed_test():
     with open('湖南_组播.txt', 'r', encoding='utf-8') as file:
         for line in file:
@@ -319,7 +319,7 @@ def group_and_sort_channels(channels):
     #  获取当前时间
     now = datetime.now()
     update_time_line = f"更新时间,#genre#\n{now.strftime('%Y-%m-%d %H:%M:%S')},url\n"
-    with open('iptv_list.txt', 'w', encoding='utf-8') as file:
+    with open('iptv4.txt', 'w', encoding='utf-8') as file:
         file.write(update_time_line)
         total_channels = 0  # 用于统计频道总数
         for group_name, channel_list in filtered_groups.items():
