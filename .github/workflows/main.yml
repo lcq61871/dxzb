@@ -43,13 +43,13 @@ jobs:
       - name: Run ZB1
         run: python ${{ github.workspace }}/DXZB.py
         
-      # - name: Run zb2
-      #   run: python ${{ github.workspace }}/zb2.py
+       - name: Run main
+         run: python ${{ github.workspace }}/main.py
 
       - name: 提交更改
         run: |
-          git config --local user.email "vjfchen@sina.com"
-          git config --local user.name "mlzlzj"
+          git config --local user.email "vjchen@sina.com"
+          git config --local user.name "mzlzj"
           git add .
           git commit *.txt -m "Add generated file" || echo "No changes to commit"
           git push -f
