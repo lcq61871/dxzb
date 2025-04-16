@@ -341,7 +341,7 @@ def group_and_sort_channels(channels):
     #             for name, url, speed in channel_list:
     #                 file.write(f"{name},{url}\n")
     #             file.write("\n")  # 打印空行分隔组
-    print(f"\n经过测速分类排序后的频道列表数量为: {total_channels} 个，已全部写入iptv_list.txt文件中。")
+    print(f"\n经过测速分类排序后的频道列表数量为: {total_channels} 个，已全部写入iptv4.txt文件中。")
     return groups
 
 grouped_channels = group_and_sort_channels(channels)
@@ -357,12 +357,12 @@ grouped_channels = group_and_sort_channels(channels)
 
 # 合并所有的txt文件
 file_contents = []
-file_paths = ["iptv_list.txt", "AKTV.txt", "hnyd.txt"]  # 替换为实际的文件路径列表
+file_paths = ["iptv4.txt", "AKTV.txt", "hnyd.txt"]  # 替换为实际的文件路径列表
 for file_path in file_paths:
     with open(file_path, 'r', encoding="utf-8") as file:
         content = file.read()
         file_contents.append(content)
 
 # 写入合并后的txt文件
-with open("iptv_list.txt", "w", encoding="utf-8") as output:
+with open("iptv4.txt", "w", encoding="utf-8") as output:
     output.write('\n'.join(file_contents))
